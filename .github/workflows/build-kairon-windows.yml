@@ -1,0 +1,50 @@
+name: Compilar KAIRON WA para Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'installer/**'
+      - '.github/workflows/build-kairon-windows.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - name: Obter codigo
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            app/package-lock.json
+            app/dashboard/package-lock.json
+
+      - name: Instalar Inno Setup
+        shell: pwsh
+        run: choco install innosetup -y --no-progress
+
+      - name: Preparar pacote a partir do codigo OpenWA
+        shell: pwsh
+        run: ./installer/Prepare-Payload.ps1
+
+      - name: Compilar instalador KAIRON WA
+        shell: pwsh
+        run: ./installer/Build-Installer.ps1
+
+      - name: Publicar instalador compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: KAIRON-WA-Setup-Windows
+          path: installer/output/*.exe
+          if-no-files-found: error
+          retention-days: 14
