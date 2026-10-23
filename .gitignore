@@ -1,0 +1,31 @@
+# Local configuration and secrets
+**/.env
+**/.env.*.local
+**/.api-key
+
+# Dependencies and builds
+**/node_modules/
+**/dist/
+**/build/
+**/output/
+coverage/
+
+# Runtime/user data
+**/data/
+**/sessions/
+**/.wwebjs_auth/
+**/.wwebjs_cache/
+**/media/
+**/uploads/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Generated installers and local tooling
+*.exe
+*.msi
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

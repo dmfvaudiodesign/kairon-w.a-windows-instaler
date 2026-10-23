@@ -1,0 +1,7 @@
+Base: OpenWA-main (1).zip
+Arquivos originais restaurados: 1969
+Aparencia CSS/imagens KAIRON preservadas: 25
+Ajustes exclusivamente visuais HTML/TSX: Layout.tsx, Login.tsx, index.html
+Instalador KAIRON preservado.
+Backend, dependencies, tests and other application logic: OpenWA original.
+Ainda nao compilado em Windows.
